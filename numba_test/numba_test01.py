@@ -49,9 +49,6 @@ print('with numba',(time.time() - st11)*1000)
 
 import time
 from numba import jit
-
-import time
-from numba import jit
  
 def num():
  
