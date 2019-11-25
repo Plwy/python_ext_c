@@ -1,7 +1,8 @@
 import numpy as np
 import cv2
 import mesh_render
-
+import os
+import codecs
 
 class OBJ:
     def __init__(self, fdir, filename):
@@ -13,7 +14,7 @@ class OBJ:
         self.v_colors=[]
         self.mtl = None
 
-        OBJ_path = fdir + filename
+        OBJ_path = os.path.join(fdir + filename)
         obj_f= codecs.open(OBJ_path, 'r',encoding= 'utf-8',errors='ignore')
     
         
@@ -65,8 +66,8 @@ class OBJ:
 
 
 
-def render_colors(vertices, triangles, colors, img):
-    colors = colors *(1/255)
+def render_colors(vertices, triangles, colors, image):
+    # colors = colors *(1/255)
     h = image.shape[0]
     w = image.shape[1]
     c = image.shape[2]
@@ -94,7 +95,8 @@ def render_colors(vertices, triangles, colors, img):
 
 
 def main():
-    fdir = 'datas/vcolors/'
+    
+    fdir = os.path.join(os.path.dirname(__file__),'../datas/')
     filename = '0.obj'
     obj = OBJ(fdir, filename)
 
@@ -108,11 +110,16 @@ def main():
         triangles.append(face_idxs)
     triangles = np.array(triangles)
 
-    h, w, c = 800,1000,3
+    # print(vertices.shape)
+    # print(colors.shape)
+    # print(triangles.shape)
+
+    h, w, c = 400,500,3
     bgr = np.zeros((h,w,c), dtype= np.float32)
-    img_render，Map = render_colors(vertices, triangles, colors, bgr)
+    img_render,_ = render_colors(vertices, triangles, colors, bgr)
+    img_render = cv2.flip(img_render,0)
     cv2.imshow('render result', img_render)
     cv2.waitKey(0)
 
-if __name__ = '__main__':
+if __name__ == '__main__':
     main()
