@@ -16,11 +16,12 @@ using cv::Vec3b;
 using namespace std;
 using namespace cv;
 
-// #ifdef __cplusplus 
-// extern "C" { 
-// #endif
-// extern void mls_deformation(int height, int width, uchar* oriImg,  uchar* dstImg, int *x1, int *y1, int n, int *x2, int *y2);
-// #ifdef __cplusplus 
+#ifdef __cplusplus 
+extern "C" { 
+#endif
+extern void cmls_deformation(int height, int width, uchar* oriImg,  uchar* dstImg, int *x1, int *y1, int n, int *x2, int *y2);
+#ifdef __cplusplus 
+} 
+#endif
 
-void cmls_deformation(int height, int width, uchar* oriImg,  uchar* dstImg, int *x1, int *y1, int n, int *x2, int *y2);
 #endif

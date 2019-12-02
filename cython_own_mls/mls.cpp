@@ -289,14 +289,15 @@ void ImgWarp_MLS_Rigid::calcDelta() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-void mls_deformation(int height, int width, uchar *oriImg,  uchar *dstImg, int *x1, int *y1, int n1, int *x2, int *y2)
+void cmls_deformation(int height, int width, uchar *oriImg,  uchar *dstImg, int *x1, int *y1, int n1, int *x2, int *y2)
 {
 
     // std::cout << "height: " << height << "width: " << width << std::endl;
     // std::cout << "n: " << n1 << std::endl;
     std::vector<cv::Point2i> vL;
     std::vector<cv::Point2i> vQ;
-    for(int i = 0; i < n1*2; i+=2){
+    // for(int i = 0; i < n1*2; i+=2){
+    for(int i = 0; i < n1; i++){
 	    vL.push_back(cv::Point2i(x1[i], y1[i]));
 	    vQ.push_back(cv::Point2i(x2[i], y2[i]));
 	}
@@ -316,7 +317,7 @@ void mls_deformation(int height, int width, uchar *oriImg,  uchar *dstImg, int *
             }
         }
     }
-
+    
     cv::Mat curImg = image;
     ImgWarp_MLS * imgTrans;
     imgTrans = new ImgWarp_MLS_Rigid();   
